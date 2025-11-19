@@ -46,11 +46,11 @@ export const authOptions: NextAuthOptions = {
 
           // Return user object (password will be excluded from session)
           return {
-            id: user._id.toString(),
-            email: user.email,
-            name: user.name,
-            role: user.role,
-            image: user.image,
+            id: String(user._id),
+            email: user.email || '',
+            name: user.name || '',
+            role: user.role || 'user',
+            image: user.image || null,
           };
         } catch (error) {
           console.error('Auth error:', error);

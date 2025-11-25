@@ -2,6 +2,8 @@ import { Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { DeleteProductButton } from "@/components/delete-product-button";
+import dbConnect from "@/lib/db";
+import Product from "@/models/Product";
 
 // Product type
 interface Product {
@@ -24,27 +26,40 @@ interface ProductsResponse {
   };
 }
 
-// Fetch products server-side
+// Fetch products server-side directly from DB
 async function getProducts(): Promise<ProductsResponse> {
   try {
-    const baseUrl = process.env.NEXTAUTH_URL || "http://localhost:3000";
-    const res = await fetch(`${baseUrl}/api/products?limit=50`, {
-      next: { revalidate: 60 }, // Revalidate every 60 seconds
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    await dbConnect();
 
-    if (!res.ok) {
-      throw new Error("Failed to fetch products");
-    }
+    const limit = 50;
+    const [products, total] = await Promise.all([
+      Product.find({})
+        .sort({ createdAt: -1 })
+        .limit(limit)
+        .lean(),
+      Product.countDocuments({}),
+    ]);
 
-    return res.json();
+    // Serialize the data
+    const serializedProducts = products.map((product) => ({
+      _id: product._id.toString(),
+      name: product.name,
+      price: product.price,
+      description: product.description,
+      image: product.image,
+      createdAt: product.createdAt?.toISOString() || new Date().toISOString(),
+      updatedAt: product.updatedAt?.toISOString() || new Date().toISOString(),
+    }));
+
+    return {
+      products: serializedProducts,
+      pagination: { page: 1, limit, total, totalPages: Math.ceil(total / limit) },
+    };
   } catch (error) {
     console.error("Error fetching products:", error);
     return {
       products: [],
-      pagination: { page: 1, limit: 10, total: 0, totalPages: 0 },
+      pagination: { page: 1, limit: 50, total: 0, totalPages: 0 },
     };
   }
 }
@@ -251,6 +266,8 @@ function ProductListSkeleton() {
 }
 
 // Main Products Page
+export const revalidate = 60; // Revalidate every 60 seconds
+
 export default function ProductsPage() {
   return (
     <div className="space-y-6">

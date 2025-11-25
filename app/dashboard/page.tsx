@@ -4,6 +4,8 @@ import Link from "next/link";
 import dbConnect from "@/lib/db";
 import Product from "@/models/Product";
 
+export const revalidate = 60; // Revalidate every 60 seconds
+
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
 

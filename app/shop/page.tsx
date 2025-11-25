@@ -28,7 +28,7 @@ async function getProducts(): Promise<ProductsResponse> {
   try {
     const baseUrl = process.env.NEXTAUTH_URL || "http://localhost:3000";
     const res = await fetch(`${baseUrl}/api/products?limit=100`, {
-      cache: "no-store",
+      next: { revalidate: 60 }, // Revalidate every 60 seconds
       headers: {
         "Content-Type": "application/json",
       },

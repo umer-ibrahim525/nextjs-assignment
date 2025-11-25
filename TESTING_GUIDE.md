@@ -3,9 +3,11 @@
 ## 🚀 Quick Start Guide
 
 ### 1. **Start the Development Server**
+
 ```bash
 npm run dev
 ```
+
 Visit: http://localhost:3000
 
 ---
@@ -13,6 +15,7 @@ Visit: http://localhost:3000
 ## 📍 Available Pages
 
 ### **Public Pages** (No login required)
+
 - **Home**: http://localhost:3000
 - **Shop**: http://localhost:3000/shop
 - **Product Details**: http://localhost:3000/shop/[id]
@@ -20,6 +23,7 @@ Visit: http://localhost:3000
 - **Register**: http://localhost:3000/register
 
 ### **Protected Pages** (Login required)
+
 - **Dashboard**: http://localhost:3000/dashboard
 - **Products List**: http://localhost:3000/dashboard/products
 - **Create Product**: http://localhost:3000/dashboard/products/new
@@ -30,6 +34,7 @@ Visit: http://localhost:3000
 ## 🔐 Testing Authentication
 
 ### **Step 1: Create an Account**
+
 1. Go to: http://localhost:3000/register
 2. Fill in:
    - Name: `John Doe`
@@ -40,6 +45,7 @@ Visit: http://localhost:3000
 4. You'll be redirected to login
 
 ### **Step 2: Login**
+
 1. Go to: http://localhost:3000/login
 2. Enter:
    - Email: `john@example.com`
@@ -48,7 +54,9 @@ Visit: http://localhost:3000
 4. You'll be redirected to the dashboard
 
 ### **Step 3: Test Dashboard**
+
 After login, you can:
+
 - ✅ View dashboard home with statistics
 - ✅ Navigate using the sidebar
 - ✅ Create new products with image upload
@@ -62,6 +70,7 @@ After login, you can:
 ## 🛍️ Testing Product Management
 
 ### **Create a Product**
+
 1. Login first
 2. Go to: http://localhost:3000/dashboard/products/new
 3. Fill in:
@@ -72,16 +81,19 @@ After login, you can:
 5. Click "Create Product"
 
 ### **View Products**
+
 - **Dashboard**: http://localhost:3000/dashboard/products
 - **Public Shop**: http://localhost:3000/shop (no login needed)
 
 ### **Edit a Product**
+
 1. From products list, click "View" on any product
 2. Click "Edit" button
 3. Modify fields
 4. Click "Save Changes"
 
 ### **Delete a Product**
+
 1. From product detail page (edit mode)
 2. Click "Delete Product" (red button)
 3. Confirm deletion
@@ -91,6 +103,7 @@ After login, you can:
 ## 🧪 Testing Scenarios
 
 ### **Authentication Tests**
+
 - ✅ Register with valid details
 - ✅ Register with duplicate email (should fail)
 - ✅ Login with correct credentials
@@ -99,6 +112,7 @@ After login, you can:
 - ✅ Logout and verify redirect to home
 
 ### **Product CRUD Tests**
+
 - ✅ Create product with image upload
 - ✅ Create product with all fields
 - ✅ View product list (pagination if many)
@@ -107,6 +121,7 @@ After login, you can:
 - ✅ View products in public shop (no auth)
 
 ### **Navigation Tests**
+
 - ✅ Home → Login → Dashboard
 - ✅ Register → Login → Dashboard
 - ✅ Dashboard sidebar navigation
@@ -118,25 +133,33 @@ After login, you can:
 ## 🐛 Common Issues & Solutions
 
 ### **Issue: "Cannot connect to MongoDB"**
-**Solution**: 
+
+**Solution**:
+
 - Check `.env.local` has correct MongoDB URI
 - Ensure MongoDB Atlas IP whitelist includes your IP (or 0.0.0.0/0)
 - Verify database user credentials
 
 ### **Issue: "401 Unauthorized" when accessing dashboard**
+
 **Solution**:
+
 - Make sure you're logged in
 - Clear cookies and login again
 - Check NEXTAUTH_SECRET is set in .env.local
 
 ### **Issue: "Image upload failed"**
+
 **Solution**:
+
 - Check `public/uploads` directory exists
 - Ensure file size is under 5MB
 - Verify file type is JPEG, PNG, GIF, or WebP
 
 ### **Issue: "Error: Invalid credentials"**
+
 **Solution**:
+
 - Verify email and password are correct
 - If just registered, make sure account was created (check database)
 - Try creating a new account
@@ -146,14 +169,18 @@ After login, you can:
 ## 📊 Database Verification
 
 ### **Check if users are created**
+
 MongoDB Atlas:
+
 1. Go to Collections
 2. Select database: `next-admin`
 3. Collection: `users`
 4. You should see registered users
 
 ### **Check if products are created**
+
 MongoDB Atlas:
+
 1. Go to Collections
 2. Select database: `next-admin`
 3. Collection: `products`
@@ -180,15 +207,15 @@ MongoDB Atlas:
 
 ## 🔗 Important URLs
 
-| Page | URL | Auth Required |
-|------|-----|---------------|
-| Home | http://localhost:3000 | No |
-| Register | http://localhost:3000/register | No |
-| Login | http://localhost:3000/login | No |
-| Shop | http://localhost:3000/shop | No |
-| Dashboard | http://localhost:3000/dashboard | Yes |
-| Products | http://localhost:3000/dashboard/products | Yes |
-| New Product | http://localhost:3000/dashboard/products/new | Yes |
+| Page        | URL                                          | Auth Required |
+| ----------- | -------------------------------------------- | ------------- |
+| Home        | http://localhost:3000                        | No            |
+| Register    | http://localhost:3000/register               | No            |
+| Login       | http://localhost:3000/login                  | No            |
+| Shop        | http://localhost:3000/shop                   | No            |
+| Dashboard   | http://localhost:3000/dashboard              | Yes           |
+| Products    | http://localhost:3000/dashboard/products     | Yes           |
+| New Product | http://localhost:3000/dashboard/products/new | Yes           |
 
 ---
 
@@ -206,6 +233,7 @@ MongoDB Atlas:
 ## 🎉 You're All Set!
 
 Your admin dashboard is fully functional. Start by:
+
 1. Running `npm run dev`
 2. Going to http://localhost:3000
 3. Clicking "Get Started" to register

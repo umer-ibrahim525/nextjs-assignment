@@ -1,6 +1,6 @@
-import { Suspense } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
+import { Suspense } from "react";
+import Link from "next/link";
+import Image from "next/image";
 
 // Product type
 interface Product {
@@ -26,21 +26,21 @@ interface ProductsResponse {
 // Fetch products server-side
 async function getProducts(): Promise<ProductsResponse> {
   try {
-    const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000';
+    const baseUrl = process.env.NEXTAUTH_URL || "http://localhost:3000";
     const res = await fetch(`${baseUrl}/api/products?limit=100`, {
-      cache: 'no-store',
+      cache: "no-store",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
 
     if (!res.ok) {
-      throw new Error('Failed to fetch products');
+      throw new Error("Failed to fetch products");
     }
 
     return res.json();
   } catch (error) {
-    console.error('Error fetching products:', error);
+    console.error("Error fetching products:", error);
     return {
       products: [],
       pagination: { page: 1, limit: 10, total: 0, totalPages: 0 },
@@ -151,7 +151,9 @@ export default function ShopPage() {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl font-bold text-gray-900">Shop</h1>
-              <p className="text-gray-600 mt-1">Browse our collection of products</p>
+              <p className="text-gray-600 mt-1">
+                Browse our collection of products
+              </p>
             </div>
             <Link
               href="/dashboard"
@@ -206,11 +208,15 @@ async function ProductStats() {
       </div>
       <div>
         <p className="text-sm text-gray-600">Average Price</p>
-        <p className="text-2xl font-bold text-gray-900">${avgPrice.toFixed(2)}</p>
+        <p className="text-2xl font-bold text-gray-900">
+          ${avgPrice.toFixed(2)}
+        </p>
       </div>
       <div>
         <p className="text-sm text-gray-600">Total Value</p>
-        <p className="text-2xl font-bold text-gray-900">${totalValue.toFixed(2)}</p>
+        <p className="text-2xl font-bold text-gray-900">
+          ${totalValue.toFixed(2)}
+        </p>
       </div>
     </div>
   );

@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useState, useEffect, FormEvent } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import Image from 'next/image';
-import { LocalImageUpload } from '@/components/local-image-upload';
-import { useToast } from '@/components/toast';
+import { useState, useEffect, FormEvent } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
+import { LocalImageUpload } from "@/components/local-image-upload";
+import { useToast } from "@/components/toast";
 
 interface Product {
   _id: string;
@@ -27,16 +27,16 @@ export default function ProductDetailPage({
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [deleting, setDeleting] = useState(false);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [editMode, setEditMode] = useState(false);
   const [product, setProduct] = useState<Product | null>(null);
-  const [productId, setProductId] = useState<string>('');
+  const [productId, setProductId] = useState<string>("");
   const [formData, setFormData] = useState({
-    name: '',
-    price: '',
-    description: '',
-    image: '',
+    name: "",
+    price: "",
+    description: "",
+    image: "",
   });
 
   // Get product ID from params
@@ -51,14 +51,14 @@ export default function ProductDetailPage({
   // Fetch product data
   useEffect(() => {
     if (!productId) return;
-    
+
     const fetchProduct = async () => {
       try {
         const response = await fetch(`/api/products/${productId}`);
         const data = await response.json();
 
         if (!response.ok) {
-          throw new Error(data.error || 'Failed to fetch product');
+          throw new Error(data.error || "Failed to fetch product");
         }
 
         setProduct(data.product);
@@ -69,7 +69,7 @@ export default function ProductDetailPage({
           image: data.product.image,
         });
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to load product');
+        setError(err instanceof Error ? err.message : "Failed to load product");
       } finally {
         setLoading(false);
       }
@@ -81,22 +81,22 @@ export default function ProductDetailPage({
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSaving(true);
-    setError('');
-    setSuccess('');
+    setError("");
+    setSuccess("");
 
     try {
       // Validate price
       const price = parseFloat(formData.price);
       if (isNaN(price) || price <= 0) {
-        setError('Please enter a valid price greater than 0');
+        setError("Please enter a valid price greater than 0");
         setSaving(false);
         return;
       }
 
       const response = await fetch(`/api/products/${productId}`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           name: formData.name,
@@ -109,54 +109,60 @@ export default function ProductDetailPage({
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to update product');
+        throw new Error(data.error || "Failed to update product");
       }
 
       // Update local state
       setProduct(data.product);
-      setSuccess('Product updated successfully!');
-      showToast('Product updated successfully!', 'success');
+      setSuccess("Product updated successfully!");
+      showToast("Product updated successfully!", "success");
       setEditMode(false);
-      
+
       // Refresh the page data
       router.refresh();
     } catch (err) {
-      const errorMsg = err instanceof Error ? err.message : 'Failed to update product';
+      const errorMsg =
+        err instanceof Error ? err.message : "Failed to update product";
       setError(errorMsg);
-      showToast(errorMsg, 'error');
+      showToast(errorMsg, "error");
     } finally {
       setSaving(false);
     }
   };
 
   const handleDelete = async () => {
-    if (!confirm('Are you sure you want to delete this product? This action cannot be undone.')) {
+    if (
+      !confirm(
+        "Are you sure you want to delete this product? This action cannot be undone."
+      )
+    ) {
       return;
     }
 
     setDeleting(true);
-    setError('');
+    setError("");
 
     try {
       const response = await fetch(`/api/products/${productId}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to delete product');
+        throw new Error(data.error || "Failed to delete product");
       }
 
-      showToast('Product deleted successfully!', 'success');
-      
+      showToast("Product deleted successfully!", "success");
+
       // Redirect to products page
-      router.push('/dashboard/products');
+      router.push("/dashboard/products");
       router.refresh();
     } catch (err) {
-      const errorMsg = err instanceof Error ? err.message : 'Failed to delete product';
+      const errorMsg =
+        err instanceof Error ? err.message : "Failed to delete product";
       setError(errorMsg);
-      showToast(errorMsg, 'error');
+      showToast(errorMsg, "error");
       setDeleting(false);
     }
   };
@@ -181,8 +187,8 @@ export default function ProductDetailPage({
       });
     }
     setEditMode(false);
-    setError('');
-    setSuccess('');
+    setError("");
+    setSuccess("");
   };
 
   if (loading) {
@@ -243,10 +249,12 @@ export default function ProductDetailPage({
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-bold text-gray-800">
-              {editMode ? 'Edit Product' : 'Product Details'}
+              {editMode ? "Edit Product" : "Product Details"}
             </h1>
             <p className="text-sm text-gray-600 mt-1">
-              {editMode ? 'Update product information' : 'View and manage product'}
+              {editMode
+                ? "Update product information"
+                : "View and manage product"}
             </p>
           </div>
           {!editMode && (
@@ -477,7 +485,7 @@ export default function ProductDetailPage({
                     Saving...
                   </>
                 ) : (
-                  'Save Changes'
+                  "Save Changes"
                 )}
               </button>
             </div>
@@ -524,7 +532,9 @@ export default function ProductDetailPage({
                 <div className="border-t border-gray-200 pt-6 space-y-3">
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-600">Product ID:</span>
-                    <span className="font-mono text-gray-800">{product?._id}</span>
+                    <span className="font-mono text-gray-800">
+                      {product?._id}
+                    </span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-600">Created:</span>

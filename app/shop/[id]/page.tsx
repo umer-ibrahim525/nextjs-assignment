@@ -1,7 +1,7 @@
-import { Suspense } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { notFound } from 'next/navigation';
+import { Suspense } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { notFound } from "next/navigation";
 
 // Product type
 interface Product {
@@ -17,11 +17,11 @@ interface Product {
 // Fetch single product
 async function getProduct(id: string): Promise<Product | null> {
   try {
-    const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000';
+    const baseUrl = process.env.NEXTAUTH_URL || "http://localhost:3000";
     const res = await fetch(`${baseUrl}/api/products/${id}`, {
-      cache: 'no-store',
+      cache: "no-store",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
 
@@ -32,7 +32,7 @@ async function getProduct(id: string): Promise<Product | null> {
     const data = await res.json();
     return data.product;
   } catch (error) {
-    console.error('Error fetching product:', error);
+    console.error("Error fetching product:", error);
     return null;
   }
 }
@@ -194,7 +194,7 @@ export default async function ProductPage({
   params: Promise<{ id: string }>;
 }) {
   const resolvedParams = await params;
-  
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}

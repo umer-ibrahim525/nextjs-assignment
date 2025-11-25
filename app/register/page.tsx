@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { useState, FormEvent, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { useState, FormEvent, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function RegisterPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [dbStatus, setDbStatus] = useState<{
     connected: boolean;
@@ -15,17 +15,17 @@ export default function RegisterPage() {
     error?: string;
   }>({ connected: false, loading: true });
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
 
   // Check database connection on mount
   useEffect(() => {
     const checkDbConnection = async () => {
       try {
-        const response = await fetch('/api/test-db');
+        const response = await fetch("/api/test-db");
         const data = await response.json();
         setDbStatus({
           connected: data.success,
@@ -36,7 +36,7 @@ export default function RegisterPage() {
         setDbStatus({
           connected: false,
           loading: false,
-          error: 'Failed to check database connection',
+          error: "Failed to check database connection",
         });
       }
     };
@@ -47,28 +47,28 @@ export default function RegisterPage() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
     setSuccess(false);
 
     // Validate passwords match
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
       setLoading(false);
       return;
     }
 
     // Validate password length
     if (formData.password.length < 6) {
-      setError('Password must be at least 6 characters');
+      setError("Password must be at least 6 characters");
       setLoading(false);
       return;
     }
 
     try {
-      const response = await fetch('/api/auth/register', {
-        method: 'POST',
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           name: formData.name,
@@ -80,17 +80,17 @@ export default function RegisterPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Registration failed');
+        throw new Error(data.error || "Registration failed");
       }
 
       setSuccess(true);
-      
+
       // Redirect to login after 2 seconds
       setTimeout(() => {
-        router.push('/login');
+        router.push("/login");
       }, 2000);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred');
+      setError(err instanceof Error ? err.message : "An error occurred");
       setLoading(false);
     }
   };
@@ -121,7 +121,9 @@ export default function RegisterPage() {
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
               ></path>
             </svg>
-            <span className="text-sm text-gray-700">Checking database connection...</span>
+            <span className="text-sm text-gray-700">
+              Checking database connection...
+            </span>
           </div>
         ) : dbStatus.connected ? (
           <div className="mb-4 p-3 bg-green-50 border border-green-300 rounded-lg flex items-center">
@@ -258,9 +260,7 @@ export default function RegisterPage() {
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
                 placeholder="••••••••"
               />
-              <p className="text-xs text-gray-500 mt-1">
-                Minimum 6 characters
-              </p>
+              <p className="text-xs text-gray-500 mt-1">Minimum 6 characters</p>
             </div>
 
             {/* Confirm Password */}
@@ -291,18 +291,22 @@ export default function RegisterPage() {
               disabled={loading || success}
               className={`w-full py-3 px-4 rounded-lg text-white font-semibold transition-colors ${
                 loading || success
-                  ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-blue-600 hover:bg-blue-700'
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-blue-600 hover:bg-blue-700"
               }`}
             >
-              {loading ? 'Creating account...' : success ? 'Success!' : 'Create Account'}
+              {loading
+                ? "Creating account..."
+                : success
+                ? "Success!"
+                : "Create Account"}
             </button>
           </form>
 
           {/* Divider */}
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
-              Already have an account?{' '}
+              Already have an account?{" "}
               <Link
                 href="/login"
                 className="text-blue-600 hover:text-blue-700 font-semibold"

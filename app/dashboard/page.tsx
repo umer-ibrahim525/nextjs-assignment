@@ -1,8 +1,8 @@
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/auth';
-import Link from 'next/link';
-import dbConnect from '@/lib/db';
-import Product from '@/models/Product';
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import Link from "next/link";
+import dbConnect from "@/lib/db";
+import Product from "@/models/Product";
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
@@ -13,7 +13,7 @@ export default async function DashboardPage() {
     await dbConnect();
     productCount = await Product.countDocuments();
   } catch (error) {
-    console.error('Error fetching product count:', error);
+    console.error("Error fetching product count:", error);
   }
 
   return (
@@ -219,21 +219,27 @@ export default async function DashboardPage() {
           </div>
           <div className="p-4 bg-gray-50 rounded-lg">
             <p className="text-sm text-gray-600 mb-1">Email</p>
-            <p className="font-semibold text-gray-800">{session?.user?.email}</p>
+            <p className="font-semibold text-gray-800">
+              {session?.user?.email}
+            </p>
           </div>
           <div className="p-4 bg-gray-50 rounded-lg">
             <p className="text-sm text-gray-600 mb-1">Role</p>
-            <span className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${
-              session?.user?.role === 'admin' 
-                ? 'bg-yellow-100 text-yellow-800' 
-                : 'bg-blue-100 text-blue-800'
-            }`}>
+            <span
+              className={`inline-block px-3 py-1 rounded-full text-sm font-semibold ${
+                session?.user?.role === "admin"
+                  ? "bg-yellow-100 text-yellow-800"
+                  : "bg-blue-100 text-blue-800"
+              }`}
+            >
               {session?.user?.role?.toUpperCase()}
             </span>
           </div>
           <div className="p-4 bg-gray-50 rounded-lg">
             <p className="text-sm text-gray-600 mb-1">User ID</p>
-            <p className="font-mono text-xs text-gray-600">{session?.user?.id}</p>
+            <p className="font-mono text-xs text-gray-600">
+              {session?.user?.id}
+            </p>
           </div>
         </div>
       </div>
@@ -261,8 +267,12 @@ export default async function DashboardPage() {
               </svg>
             </div>
             <div>
-              <h3 className="font-semibold text-gray-800">Product Management</h3>
-              <p className="text-sm text-gray-600">Create, edit, and delete products</p>
+              <h3 className="font-semibold text-gray-800">
+                Product Management
+              </h3>
+              <p className="text-sm text-gray-600">
+                Create, edit, and delete products
+              </p>
             </div>
           </div>
           <div className="flex items-start space-x-3">
@@ -283,7 +293,9 @@ export default async function DashboardPage() {
             </div>
             <div>
               <h3 className="font-semibold text-gray-800">Image Upload</h3>
-              <p className="text-sm text-gray-600">Upload product images locally</p>
+              <p className="text-sm text-gray-600">
+                Upload product images locally
+              </p>
             </div>
           </div>
           <div className="flex items-start space-x-3">
@@ -304,7 +316,9 @@ export default async function DashboardPage() {
             </div>
             <div>
               <h3 className="font-semibold text-gray-800">Public Shop</h3>
-              <p className="text-sm text-gray-600">Customer-facing product catalog</p>
+              <p className="text-sm text-gray-600">
+                Customer-facing product catalog
+              </p>
             </div>
           </div>
           <div className="flex items-start space-x-3">
@@ -325,7 +339,9 @@ export default async function DashboardPage() {
             </div>
             <div>
               <h3 className="font-semibold text-gray-800">Authentication</h3>
-              <p className="text-sm text-gray-600">Secure login and registration</p>
+              <p className="text-sm text-gray-600">
+                Secure login and registration
+              </p>
             </div>
           </div>
         </div>

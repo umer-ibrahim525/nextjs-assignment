@@ -1,7 +1,7 @@
-import { Suspense } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { DeleteProductButton } from '@/components/delete-product-button';
+import { Suspense } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { DeleteProductButton } from "@/components/delete-product-button";
 
 // Product type
 interface Product {
@@ -27,21 +27,21 @@ interface ProductsResponse {
 // Fetch products server-side
 async function getProducts(): Promise<ProductsResponse> {
   try {
-    const baseUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000';
+    const baseUrl = process.env.NEXTAUTH_URL || "http://localhost:3000";
     const res = await fetch(`${baseUrl}/api/products?limit=50`, {
-      cache: 'no-store', // Always get fresh data
+      cache: "no-store", // Always get fresh data
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
 
     if (!res.ok) {
-      throw new Error('Failed to fetch products');
+      throw new Error("Failed to fetch products");
     }
 
     return res.json();
   } catch (error) {
-    console.error('Error fetching products:', error);
+    console.error("Error fetching products:", error);
     return {
       products: [],
       pagination: { page: 1, limit: 10, total: 0, totalPages: 0 },
@@ -171,7 +171,7 @@ async function ProductList() {
                   >
                     Edit
                   </Link>
-                  <DeleteProductButton 
+                  <DeleteProductButton
                     productId={product._id}
                     productName={product.name}
                   />
@@ -185,7 +185,7 @@ async function ProductList() {
       {/* Footer with total count */}
       <div className="bg-gray-50 px-6 py-3 border-t border-gray-200">
         <p className="text-sm text-gray-700">
-          Showing <span className="font-medium">{products.length}</span> of{' '}
+          Showing <span className="font-medium">{products.length}</span> of{" "}
           <span className="font-medium">{data.pagination.total}</span> products
         </p>
       </div>

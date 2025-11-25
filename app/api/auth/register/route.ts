@@ -70,7 +70,7 @@ export async function POST(req: NextRequest) {
   } catch (error: unknown) {
     console.error('Registration error:', error);
     console.error('Error details:', JSON.stringify(error, null, 2));
-    
+
     // Handle duplicate key error
     if (error && typeof error === 'object' && 'code' in error && error.code === 11000) {
       return NextResponse.json(

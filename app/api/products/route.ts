@@ -17,11 +17,11 @@ export async function GET(req: NextRequest) {
     // Build search query
     const query = search
       ? {
-          $or: [
-            { name: { $regex: search, $options: 'i' } },
-            { description: { $regex: search, $options: 'i' } },
-          ],
-        }
+        $or: [
+          { name: { $regex: search, $options: 'i' } },
+          { description: { $regex: search, $options: 'i' } },
+        ],
+      }
       : {};
 
     // Fetch products with pagination

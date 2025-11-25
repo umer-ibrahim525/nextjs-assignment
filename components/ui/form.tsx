@@ -1,11 +1,11 @@
-import { ReactNode, InputHTMLAttributes, TextareaHTMLAttributes } from 'react';
+import { ReactNode, InputHTMLAttributes, TextareaHTMLAttributes } from "react";
 
 interface FormGroupProps {
   children: ReactNode;
   className?: string;
 }
 
-export function FormGroup({ children, className = '' }: FormGroupProps) {
+export function FormGroup({ children, className = "" }: FormGroupProps) {
   return <div className={`space-y-2 ${className}`}>{children}</div>;
 }
 
@@ -31,14 +31,14 @@ interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
   error?: string;
 }
 
-export function FormInput({ error, className = '', ...props }: FormInputProps) {
+export function FormInput({ error, className = "", ...props }: FormInputProps) {
   return (
     <>
       <input
         className={`
           w-full px-4 py-2.5 border rounded-lg transition-all duration-200
           focus:ring-2 focus:ring-blue-500 focus:border-transparent
-          ${error ? 'border-red-300 bg-red-50' : 'border-gray-300 bg-white'}
+          ${error ? "border-red-300 bg-red-50" : "border-gray-300 bg-white"}
           ${className}
         `}
         {...props}
@@ -48,18 +48,23 @@ export function FormInput({ error, className = '', ...props }: FormInputProps) {
   );
 }
 
-interface FormTextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+interface FormTextareaProps
+  extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   error?: string;
 }
 
-export function FormTextarea({ error, className = '', ...props }: FormTextareaProps) {
+export function FormTextarea({
+  error,
+  className = "",
+  ...props
+}: FormTextareaProps) {
   return (
     <>
       <textarea
         className={`
           w-full px-4 py-2.5 border rounded-lg transition-all duration-200 resize-none
           focus:ring-2 focus:ring-blue-500 focus:border-transparent
-          ${error ? 'border-red-300 bg-red-50' : 'border-gray-300 bg-white'}
+          ${error ? "border-red-300 bg-red-50" : "border-gray-300 bg-white"}
           ${className}
         `}
         {...props}
@@ -74,14 +79,19 @@ interface FormSelectProps extends InputHTMLAttributes<HTMLSelectElement> {
   children: ReactNode;
 }
 
-export function FormSelect({ error, className = '', children, ...props }: FormSelectProps) {
+export function FormSelect({
+  error,
+  className = "",
+  children,
+  ...props
+}: FormSelectProps) {
   return (
     <>
       <select
         className={`
           w-full px-4 py-2.5 border rounded-lg transition-all duration-200
           focus:ring-2 focus:ring-blue-500 focus:border-transparent
-          ${error ? 'border-red-300 bg-red-50' : 'border-gray-300 bg-white'}
+          ${error ? "border-red-300 bg-red-50" : "border-gray-300 bg-white"}
           ${className}
         `}
         {...props}
@@ -131,7 +141,9 @@ export function FormCard({ children, title, description }: FormCardProps) {
     <div className="bg-white rounded-xl shadow-lg">
       {(title || description) && (
         <div className="border-b border-gray-200 px-6 py-5">
-          {title && <h2 className="text-xl font-bold text-gray-900">{title}</h2>}
+          {title && (
+            <h2 className="text-xl font-bold text-gray-900">{title}</h2>
+          )}
           {description && (
             <p className="text-sm text-gray-600 mt-1">{description}</p>
           )}
@@ -144,18 +156,20 @@ export function FormCard({ children, title, description }: FormCardProps) {
 
 interface FormActionsProps {
   children: ReactNode;
-  align?: 'left' | 'center' | 'right';
+  align?: "left" | "center" | "right";
 }
 
-export function FormActions({ children, align = 'right' }: FormActionsProps) {
+export function FormActions({ children, align = "right" }: FormActionsProps) {
   const alignClasses = {
-    left: 'justify-start',
-    center: 'justify-center',
-    right: 'justify-end',
+    left: "justify-start",
+    center: "justify-center",
+    right: "justify-end",
   };
 
   return (
-    <div className={`flex items-center space-x-4 pt-6 border-t border-gray-200 ${alignClasses[align]}`}>
+    <div
+      className={`flex items-center space-x-4 pt-6 border-t border-gray-200 ${alignClasses[align]}`}
+    >
       {children}
     </div>
   );

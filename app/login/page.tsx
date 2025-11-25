@@ -1,29 +1,29 @@
-'use client';
+"use client";
 
-import { useState, FormEvent, useEffect } from 'react';
-import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { useState, FormEvent, useEffect } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function LoginPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [dbStatus, setDbStatus] = useState<{
     connected: boolean;
     loading: boolean;
     error?: string;
   }>({ connected: false, loading: true });
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   // Check database connection on mount
   useEffect(() => {
     const checkDbConnection = async () => {
       try {
-        const response = await fetch('/api/test-db');
+        const response = await fetch("/api/test-db");
         const data = await response.json();
         setDbStatus({
           connected: data.success,
@@ -34,7 +34,7 @@ export default function LoginPage() {
         setDbStatus({
           connected: false,
           loading: false,
-          error: 'Failed to check database connection',
+          error: "Failed to check database connection",
         });
       }
     };
@@ -45,26 +45,26 @@ export default function LoginPage() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
 
     try {
-      const result = await signIn('credentials', {
+      const result = await signIn("credentials", {
         email: formData.email,
         password: formData.password,
         redirect: false,
       });
 
       if (result?.error) {
-        setError('Invalid email or password');
+        setError("Invalid email or password");
         setLoading(false);
         return;
       }
 
       // Redirect to dashboard on success
-      router.push('/dashboard');
+      router.push("/dashboard");
       router.refresh();
     } catch (err) {
-      setError('An error occurred. Please try again.');
+      setError("An error occurred. Please try again.");
       setLoading(false);
     }
   };
@@ -95,7 +95,9 @@ export default function LoginPage() {
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
               ></path>
             </svg>
-            <span className="text-sm text-gray-700">Checking database connection...</span>
+            <span className="text-sm text-gray-700">
+              Checking database connection...
+            </span>
           </div>
         ) : dbStatus.connected ? (
           <div className="mb-4 p-3 bg-green-50 border border-green-300 rounded-lg flex items-center">
@@ -209,18 +211,18 @@ export default function LoginPage() {
               disabled={loading}
               className={`w-full py-3 px-4 rounded-lg text-white font-semibold transition-colors ${
                 loading
-                  ? 'bg-gray-400 cursor-not-allowed'
-                  : 'bg-blue-600 hover:bg-blue-700'
+                  ? "bg-gray-400 cursor-not-allowed"
+                  : "bg-blue-600 hover:bg-blue-700"
               }`}
             >
-              {loading ? 'Signing in...' : 'Sign In'}
+              {loading ? "Signing in..." : "Sign In"}
             </button>
           </form>
 
           {/* Divider */}
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
-              Don't have an account?{' '}
+              Don't have an account?{" "}
               <Link
                 href="/register"
                 className="text-blue-600 hover:text-blue-700 font-semibold"
@@ -247,7 +249,8 @@ export default function LoginPage() {
             🔑 Don't have an account yet?
           </p>
           <p className="text-xs text-blue-700">
-            Click "Sign up" above to create a new account, or register directly at{' '}
+            Click "Sign up" above to create a new account, or register directly
+            at{" "}
             <Link href="/register" className="underline font-medium">
               /register
             </Link>

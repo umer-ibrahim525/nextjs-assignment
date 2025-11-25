@@ -67,7 +67,7 @@ const sampleProducts = [
 async function seedProducts() {
   try {
     console.log('🌱 Starting to seed products...');
-    
+
     // Connect to database
     await dbConnect();
     console.log('✅ Connected to database');

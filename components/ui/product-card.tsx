@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { ReactNode } from 'react';
+import Link from "next/link";
+import Image from "next/image";
+import { ReactNode } from "react";
 
 interface ProductCardProps {
   name: string;
@@ -21,7 +21,7 @@ export function ProductCard({
   href,
   onEdit,
   onDelete,
-  className = '',
+  className = "",
 }: ProductCardProps) {
   const content = (
     <>
@@ -44,8 +44,18 @@ export function ProductCard({
                 }}
                 className="p-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-lg"
               >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                  />
                 </svg>
               </button>
             )}
@@ -57,8 +67,18 @@ export function ProductCard({
                 }}
                 className="p-2 bg-red-600 text-white rounded-lg hover:bg-red-700 shadow-lg"
               >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                  />
                 </svg>
               </button>
             )}
@@ -108,10 +128,10 @@ interface ProductGridProps {
 
 export function ProductGrid({ children, columns = 4 }: ProductGridProps) {
   const gridCols = {
-    1: 'grid-cols-1',
-    2: 'md:grid-cols-2',
-    3: 'md:grid-cols-2 lg:grid-cols-3',
-    4: 'md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4',
+    1: "grid-cols-1",
+    2: "md:grid-cols-2",
+    3: "md:grid-cols-2 lg:grid-cols-3",
+    4: "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
   };
 
   return (
@@ -164,7 +184,9 @@ export function ProductListItem({
         </div>
       </td>
       <td className="px-6 py-4 whitespace-nowrap">
-        <div className="text-sm font-bold text-gray-900">${price.toFixed(2)}</div>
+        <div className="text-sm font-bold text-gray-900">
+          ${price.toFixed(2)}
+        </div>
       </td>
       <td className="px-6 py-4">
         <div className="text-sm text-gray-700 max-w-xs truncate">
@@ -176,17 +198,26 @@ export function ProductListItem({
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-3">
         {onView && (
-          <button onClick={onView} className="text-blue-600 hover:text-blue-900 font-semibold">
+          <button
+            onClick={onView}
+            className="text-blue-600 hover:text-blue-900 font-semibold"
+          >
             View
           </button>
         )}
         {onEdit && (
-          <button onClick={onEdit} className="text-indigo-600 hover:text-indigo-900 font-semibold">
+          <button
+            onClick={onEdit}
+            className="text-indigo-600 hover:text-indigo-900 font-semibold"
+          >
             Edit
           </button>
         )}
         {onDelete && (
-          <button onClick={onDelete} className="text-red-600 hover:text-red-900 font-semibold">
+          <button
+            onClick={onDelete}
+            className="text-red-600 hover:text-red-900 font-semibold"
+          >
             Delete
           </button>
         )}

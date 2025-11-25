@@ -1,41 +1,41 @@
-'use client';
+"use client";
 
-import { useState, FormEvent } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import { LocalImageUpload } from '@/components/local-image-upload';
-import { useToast } from '@/components/toast';
+import { useState, FormEvent } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { LocalImageUpload } from "@/components/local-image-upload";
+import { useToast } from "@/components/toast";
 
 export default function NewProductPage() {
   const router = useRouter();
   const { showToast } = useToast();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
-    name: '',
-    price: '',
-    description: '',
-    image: '',
+    name: "",
+    price: "",
+    description: "",
+    image: "",
   });
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
 
     try {
       // Validate price
       const price = parseFloat(formData.price);
       if (isNaN(price) || price <= 0) {
-        setError('Please enter a valid price greater than 0');
+        setError("Please enter a valid price greater than 0");
         setLoading(false);
         return;
       }
 
-      const response = await fetch('/api/products', {
-        method: 'POST',
+      const response = await fetch("/api/products", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           name: formData.name,
@@ -48,18 +48,19 @@ export default function NewProductPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to create product');
+        throw new Error(data.error || "Failed to create product");
       }
 
-      showToast('Product created successfully!', 'success');
-      
+      showToast("Product created successfully!", "success");
+
       // Success - redirect to products page
-      router.push('/dashboard/products');
+      router.push("/dashboard/products");
       router.refresh();
     } catch (err) {
-      const errorMsg = err instanceof Error ? err.message : 'Failed to create product';
+      const errorMsg =
+        err instanceof Error ? err.message : "Failed to create product";
       setError(errorMsg);
-      showToast(errorMsg, 'error');
+      showToast(errorMsg, "error");
       setLoading(false);
     }
   };
@@ -143,9 +144,7 @@ export default function NewProductPage() {
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               placeholder="Enter product name"
             />
-            <p className="text-xs text-gray-500 mt-1">
-              Maximum 100 characters
-            </p>
+            <p className="text-xs text-gray-500 mt-1">Maximum 100 characters</p>
           </div>
 
           {/* Price */}

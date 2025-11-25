@@ -1,18 +1,18 @@
-import { ReactNode } from 'react';
+import { ReactNode } from "react";
 
 interface AlertProps {
-  type?: 'success' | 'error' | 'warning' | 'info';
+  type?: "success" | "error" | "warning" | "info";
   title?: string;
   children: ReactNode;
   onClose?: () => void;
 }
 
-export function Alert({ type = 'info', title, children, onClose }: AlertProps) {
+export function Alert({ type = "info", title, children, onClose }: AlertProps) {
   const styles = {
     success: {
-      bg: 'bg-green-50',
-      border: 'border-green-200',
-      text: 'text-green-800',
+      bg: "bg-green-50",
+      border: "border-green-200",
+      text: "text-green-800",
       icon: (
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
           <path
@@ -24,9 +24,9 @@ export function Alert({ type = 'info', title, children, onClose }: AlertProps) {
       ),
     },
     error: {
-      bg: 'bg-red-50',
-      border: 'border-red-200',
-      text: 'text-red-800',
+      bg: "bg-red-50",
+      border: "border-red-200",
+      text: "text-red-800",
       icon: (
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
           <path
@@ -38,9 +38,9 @@ export function Alert({ type = 'info', title, children, onClose }: AlertProps) {
       ),
     },
     warning: {
-      bg: 'bg-yellow-50',
-      border: 'border-yellow-200',
-      text: 'text-yellow-800',
+      bg: "bg-yellow-50",
+      border: "border-yellow-200",
+      text: "text-yellow-800",
       icon: (
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
           <path
@@ -52,9 +52,9 @@ export function Alert({ type = 'info', title, children, onClose }: AlertProps) {
       ),
     },
     info: {
-      bg: 'bg-blue-50',
-      border: 'border-blue-200',
-      text: 'text-blue-800',
+      bg: "bg-blue-50",
+      border: "border-blue-200",
+      text: "text-blue-800",
       icon: (
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
           <path
@@ -98,23 +98,27 @@ export function Alert({ type = 'info', title, children, onClose }: AlertProps) {
 
 interface BadgeProps {
   children: ReactNode;
-  variant?: 'primary' | 'success' | 'warning' | 'danger' | 'secondary';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: "primary" | "success" | "warning" | "danger" | "secondary";
+  size?: "sm" | "md" | "lg";
 }
 
-export function Badge({ children, variant = 'primary', size = 'md' }: BadgeProps) {
+export function Badge({
+  children,
+  variant = "primary",
+  size = "md",
+}: BadgeProps) {
   const variantClasses = {
-    primary: 'bg-blue-100 text-blue-800',
-    success: 'bg-green-100 text-green-800',
-    warning: 'bg-yellow-100 text-yellow-800',
-    danger: 'bg-red-100 text-red-800',
-    secondary: 'bg-gray-100 text-gray-800',
+    primary: "bg-blue-100 text-blue-800",
+    success: "bg-green-100 text-green-800",
+    warning: "bg-yellow-100 text-yellow-800",
+    danger: "bg-red-100 text-red-800",
+    secondary: "bg-gray-100 text-gray-800",
   };
 
   const sizeClasses = {
-    sm: 'px-2 py-0.5 text-xs',
-    md: 'px-2.5 py-1 text-sm',
-    lg: 'px-3 py-1.5 text-base',
+    sm: "px-2 py-0.5 text-xs",
+    md: "px-2.5 py-1 text-sm",
+    lg: "px-3 py-1.5 text-base",
   };
 
   return (
@@ -126,11 +130,11 @@ export function Badge({ children, variant = 'primary', size = 'md' }: BadgeProps
   );
 }
 
-export function Spinner({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) {
+export function Spinner({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
   const sizeClasses = {
-    sm: 'h-4 w-4',
-    md: 'h-8 w-8',
-    lg: 'h-12 w-12',
+    sm: "h-4 w-4",
+    md: "h-8 w-8",
+    lg: "h-12 w-12",
   };
 
   return (

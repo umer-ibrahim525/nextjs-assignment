@@ -20,13 +20,18 @@ This document provides a comprehensive guide to using the reusable UI components
 Complete sidebar wrapper for dashboard layouts.
 
 ```tsx
-import { Sidebar, SidebarHeader, SidebarNav, SidebarFooter } from '@/components/ui';
+import {
+  Sidebar,
+  SidebarHeader,
+  SidebarNav,
+  SidebarFooter,
+} from "@/components/ui";
 
 <Sidebar>
   <SidebarHeader title="John Doe" subtitle="admin@example.com" />
   <SidebarNav>{/* Navigation items */}</SidebarNav>
   <SidebarFooter>{/* Footer content */}</SidebarFooter>
-</Sidebar>
+</Sidebar>;
 ```
 
 ### MenuSection
@@ -34,20 +39,20 @@ import { Sidebar, SidebarHeader, SidebarNav, SidebarFooter } from '@/components/
 Group related menu items together.
 
 ```tsx
-import { MenuSection } from '@/components/ui';
+import { MenuSection } from "@/components/ui";
 
 <MenuSection
   title="Main Menu"
   items={[
     {
-      href: '/dashboard',
-      label: 'Dashboard',
+      href: "/dashboard",
+      label: "Dashboard",
       icon: <DashboardIcon />,
-      badge: '3',
+      badge: "3",
     },
   ]}
   currentPath="/dashboard"
-/>
+/>;
 ```
 
 ---
@@ -59,7 +64,7 @@ import { MenuSection } from '@/components/ui';
 Display products in a grid layout.
 
 ```tsx
-import { ProductCard, ProductGrid } from '@/components/ui';
+import { ProductCard, ProductGrid } from "@/components/ui";
 
 <ProductGrid columns={4}>
   <ProductCard
@@ -68,10 +73,10 @@ import { ProductCard, ProductGrid } from '@/components/ui';
     description="Product description"
     image="/image.jpg"
     href="/products/1"
-    onEdit={() => console.log('Edit')}
-    onDelete={() => console.log('Delete')}
+    onEdit={() => console.log("Edit")}
+    onDelete={() => console.log("Delete")}
   />
-</ProductGrid>
+</ProductGrid>;
 ```
 
 ### ProductTable
@@ -79,7 +84,7 @@ import { ProductCard, ProductGrid } from '@/components/ui';
 Display products in a table format.
 
 ```tsx
-import { ProductTable, ProductListItem } from '@/components/ui';
+import { ProductTable, ProductListItem } from "@/components/ui";
 
 <ProductTable>
   <ProductListItem
@@ -93,7 +98,7 @@ import { ProductTable, ProductListItem } from '@/components/ui';
     onEdit={() => {}}
     onDelete={() => {}}
   />
-</ProductTable>
+</ProductTable>;
 ```
 
 ---
@@ -113,7 +118,7 @@ import {
   FormHelpText,
   FormActions,
   Button,
-} from '@/components/ui';
+} from "@/components/ui";
 
 <FormCard title="Create Product" description="Fill in the product details">
   <form onSubmit={handleSubmit}>
@@ -164,7 +169,7 @@ import {
       </Button>
     </FormActions>
   </form>
-</FormCard>
+</FormCard>;
 ```
 
 ---
@@ -205,11 +210,11 @@ import { Button } from '@/components/ui';
 Button styled as a link.
 
 ```tsx
-import { LinkButton } from '@/components/ui';
+import { LinkButton } from "@/components/ui";
 
 <LinkButton href="/products/new" variant="primary" icon={<PlusIcon />}>
   Add Product
-</LinkButton>
+</LinkButton>;
 ```
 
 ### IconButton
@@ -217,11 +222,11 @@ import { LinkButton } from '@/components/ui';
 Compact button for icons only.
 
 ```tsx
-import { IconButton } from '@/components/ui';
+import { IconButton } from "@/components/ui";
 
 <IconButton variant="primary" size="md">
   <EditIcon />
-</IconButton>
+</IconButton>;
 ```
 
 ---
@@ -233,13 +238,17 @@ import { IconButton } from '@/components/ui';
 Basic card container.
 
 ```tsx
-import { Card, CardHeader, CardBody, CardFooter } from '@/components/ui';
+import { Card, CardHeader, CardBody, CardFooter } from "@/components/ui";
 
 <Card>
-  <CardHeader title="Card Title" subtitle="Card subtitle" action={<Button>Action</Button>} />
+  <CardHeader
+    title="Card Title"
+    subtitle="Card subtitle"
+    action={<Button>Action</Button>}
+  />
   <CardBody>Card content goes here</CardBody>
   <CardFooter>Footer content</CardFooter>
-</Card>
+</Card>;
 ```
 
 ### StatCard
@@ -247,15 +256,15 @@ import { Card, CardHeader, CardBody, CardFooter } from '@/components/ui';
 Display statistics.
 
 ```tsx
-import { StatCard } from '@/components/ui';
+import { StatCard } from "@/components/ui";
 
 <StatCard
   title="Total Revenue"
   value="$45,231"
   icon={<DollarIcon />}
-  trend={{ value: '+23%', positive: true }}
+  trend={{ value: "+23%", positive: true }}
   color="green"
-/>
+/>;
 ```
 
 ### EmptyState
@@ -263,7 +272,7 @@ import { StatCard } from '@/components/ui';
 Display when no data is available.
 
 ```tsx
-import { EmptyState, LinkButton } from '@/components/ui';
+import { EmptyState, LinkButton } from "@/components/ui";
 
 <EmptyState
   title="No products yet"
@@ -274,7 +283,7 @@ import { EmptyState, LinkButton } from '@/components/ui';
       Add Product
     </LinkButton>
   }
-/>
+/>;
 ```
 
 ---
@@ -380,7 +389,7 @@ import {
   Button,
   LinkButton,
   Alert,
-} from '@/components/ui';
+} from "@/components/ui";
 
 export default function DashboardPage() {
   return (
@@ -394,7 +403,7 @@ export default function DashboardPage() {
           title="Total Products"
           value="152"
           icon={<BoxIcon />}
-          trend={{ value: '+12%', positive: true }}
+          trend={{ value: "+12%", positive: true }}
           color="blue"
         />
         {/* More stat cards... */}

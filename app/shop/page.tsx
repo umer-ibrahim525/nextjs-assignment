@@ -32,10 +32,7 @@ async function getProducts(): Promise<ProductsResponse> {
 
     const limit = 100;
     const [products, total] = await Promise.all([
-      Product.find({})
-        .sort({ createdAt: -1 })
-        .limit(limit)
-        .lean(),
+      Product.find({}).sort({ createdAt: -1 }).limit(limit).lean(),
       Product.countDocuments({}),
     ]);
 
@@ -52,7 +49,12 @@ async function getProducts(): Promise<ProductsResponse> {
 
     return {
       products: serializedProducts,
-      pagination: { page: 1, limit, total, totalPages: Math.ceil(total / limit) },
+      pagination: {
+        page: 1,
+        limit,
+        total,
+        totalPages: Math.ceil(total / limit),
+      },
     };
   } catch (error) {
     console.error("Error fetching products:", error);
